@@ -7,13 +7,24 @@ const { createUser, addEntry, addNote } = require('./schema')
 app.use(bodyparser.json())
 
 
-app.post('/generatedb', function (req, res) {
+app.post('/insert-user', function (req, res) {
     var obj = req.body
     // console.log(obj)
 
+    createUser(obj).then(function (doc, err) {
+        if (err) throw err
+
+        console.log("USER INSERT SUCCESSFUL")
+
+
+    })
+
 })
 
-
+app.post('/add-note', function (req, res) {
+    var heavyobj = req.body
+    
+})
 
 
 

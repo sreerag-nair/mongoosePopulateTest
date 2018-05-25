@@ -73,4 +73,11 @@ exports.addEntry = function(entryObj){
     return contentSchemaHandle(entryObj).save()
 }
 
+exports.checkUser = function(userObj){
+    return userSchemaHandle.findOne(userObj)
+}
+
+exports.checkNote = function(notesObj){
+    return notesSchemaHandle.findOne(notesObj)
+}
 //---------------------------------------------------------------------------------------
