@@ -22,7 +22,7 @@ var userSchema = new mongoose.Schema({
     userName: String,
     notesId: [
         {
-            userId: Schema.Types.ObjectId,
+            type: Schema.Types.ObjectId,
             ref: 'NotesModel'
 
         }
@@ -33,7 +33,7 @@ var notesSchema = new mongoose.Schema({
     noteTitle : String,
     notesContent : [
         {
-            notesId : Schema.Types.ObjectId,
+            type : Schema.Types.ObjectId,
             ref : 'ContentModel'
         }
     ]
@@ -49,7 +49,7 @@ var contentSchema = new mongoose.Schema(
 
 function genAllModels(){
     
-    var userSchemaHandle = db.model('Model',userSchema)
+    var userSchemaHandle = db.model('UserModel',userSchema)
     var notesSchemaHandle = db.model('NotesModel',notesSchema)
     var contentSchemaHandle = db.model('ContentModel',contentSchema)
 
@@ -59,6 +59,18 @@ function genAllModels(){
 var { userSchemaHandle, notesSchemaHandle, contentSchemaHandle } = genAllModels()
 
 
+//----------------------------------------EXPORTS----------------------------------------
+
 exports.createUser = function(userObj){
     return userSchemaHandle(userObj).save()
 }
+
+exports.addNote = function(notesObj){
+    return notesSchemaHandle(notesObj).save()
+}
+
+exports.addEntry = function(entryObj){
+    return contentSchemaHandle(entryObj).save()
+}
+
+//---------------------------------------------------------------------------------------
